@@ -8,6 +8,7 @@ import Index from "./pages/Index.tsx";
 import NotFound from "./pages/NotFound.tsx";
 
 const queryClient = new QueryClient();
+const appRoutePaths = ["/", "/~oauth", "/calendar", "/calendar/:date", "/timeline", "/onthisday"];
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
@@ -17,7 +18,9 @@ const App = () => (
         <Sonner />
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Index />} />
+            {appRoutePaths.map((path) => (
+              <Route key={path} path={path} element={<Index />} />
+            ))}
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
